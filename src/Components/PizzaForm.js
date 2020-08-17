@@ -208,7 +208,7 @@ const PizzaForm = () => {
             <Label htmlFor = "specialInstructions">
                 <textarea
                     id = "specialInstructions"
-                    type = "specialInstructions"
+                    type = "textarea"
                     name = "specialInstructions"
                     data-cy = "specialInstructions"
                     placeholder = "Any special instructions?"
