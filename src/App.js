@@ -1,6 +1,6 @@
 import React from "react";
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import Homepage from './Components/Homepage';
 import PizzaForm from './Components/PizzaForm';
 import SubmitPage from "./Components/SubmitPage";
@@ -36,6 +36,7 @@ const App = () => {
             <h5>Size: </h5>
             <h5>Toppings: </h5>
             <h5>Special Instructions: </h5>
+            <Link to="/">Go back to Home</Link>
           </div>
         );
         }}
