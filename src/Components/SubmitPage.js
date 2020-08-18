@@ -3,16 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 
 
 
-const SubmitPage = () => {
-
-    const location = useLocation();
-
-    let summary = location.pizzaForm;
+const SubmitPage = ( { pizzaForm } ) => {
 
     return (
         <div className = "homepage">
         <h3>Your order summary</h3>
-        <p>{summary}</p>
+        <p>{pizzaForm}</p>
         {/* <p>{location.pizzaForm.size}</p>
         <p>{location.pizzaForm.specialInstructions}</p> */}
    

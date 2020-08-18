@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
 import SubmitPage from './SubmitPage';
@@ -69,6 +69,11 @@ const PizzaForm = () => {
                 })
             })
         }
+
+        const location = {
+           pathname: '/submit', 
+           state: { pizzaForm : true }
+        }
   
         //Creating POST request using Axios when form is submitted using formSubmit function
         const formSubmit = (e) => {
@@ -81,14 +86,13 @@ const PizzaForm = () => {
                     console.log("POST is successful!", response.data)
                     // setPost(response.data)
                     setServerError(null)
-                    history.push('/submit', [pizzaForm])
                     setPizzaForm(emptyData)
   
                 })
                 .catch(err => {
                     setServerError("API POST request failed!")
                 })
-            
+            history.push(location)
             
         }
   
