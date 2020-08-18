@@ -229,7 +229,7 @@ const PizzaForm = () => {
             </FormGroup>
   
         
-            <Button type = "submit" data-cy = "submit" disabled = {button} >
+            <Button type = "submit" data-cy = "submit" disabled = {button} className="button" >
                 Submit Order
                 </Button>
                 

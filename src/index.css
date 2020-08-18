@@ -1,5 +1,4 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -20,4 +19,18 @@ code {
 .form {
   text-align: center;
   margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.button {
+  margin-top: 20px;
+}
+
+.homeImage {
+  width: 100%;
+  height: 50vh;
 }
