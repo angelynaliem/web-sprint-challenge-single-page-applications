@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
 import SubmitPage from './SubmitPage';
@@ -114,6 +114,11 @@ const PizzaForm = () => {
         }, [pizzaForm])
   
     return (
+        <>
+
+        <nav>
+        <Link to="/">Home</Link>
+        </nav>
 
        <Form onSubmit = {formSubmit} className="form">
        {serverError ? <p>{serverError}</p> : null}
@@ -229,7 +234,7 @@ const PizzaForm = () => {
             </FormGroup>
   
         
-            <Button type = "submit" data-cy = "submit" disabled = {button} className="button" >
+            <Button type = "submit" data-cy = "submit" disabled = {button} className="button" style={{backgroundColor: 'blue'}} >
                 Submit Order
                 </Button>
                 
@@ -238,6 +243,8 @@ const PizzaForm = () => {
   
   
        </Form>
+
+       </>
   
     )
     
