@@ -81,7 +81,7 @@ const PizzaForm = () => {
                 .then(response => {
                     console.log("POST is successful!", response.data)
                     setPost(response.data)
-                    history.push('/submit', [post])
+                    // history.push('/submit', [post])
                     setServerError(null)
                     setPizzaForm(emptyData)
   
@@ -233,10 +233,15 @@ const PizzaForm = () => {
             </Label>
             </FormGroup>
   
-        
+
+            <Link to={{
+                pathname: '/submit',
+                state: {pizzaForm}
+            }}>
             <Button type = "submit" data-cy = "submit" disabled = {button} className="button" style={{backgroundColor: 'blue'}} >
                 Submit Order
                 </Button>
+                </Link>
                 
                       {/* To display POST data on the DOM */}
                       {/* <pre>{JSON.stringify(post, null, 2)}</pre>  */}

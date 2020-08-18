@@ -24,9 +24,24 @@ const App = () => {
         <PizzaForm />
       </Route>
 
-      <Route path = "/submit" >
-        <SubmitPage />
-      </Route>
+      <Route 
+      path = "/submit"
+      render={({ location }) => {
+        const { pizzaForm } = location;
+        return (
+          <div className="orderSummary">
+            <h2>Thanks for ordering!<br></br> Here's your order summary:</h2>
+            <h5>{pizzaForm}</h5>
+            <h5>Name: </h5>
+            <h5>Size: </h5>
+            <h5>Toppings: </h5>
+            <h5>Special Instructions: </h5>
+          </div>
+        );
+        }}
+        />
+        {/* // <SubmitPage /> */}
+      {/* </Route> */}
 
       </Switch>
     </>

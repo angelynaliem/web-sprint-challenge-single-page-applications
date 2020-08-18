@@ -10,7 +10,7 @@ const Homepage = () => {
         <div className = "homepage">
         <img className="homeImage" src={Image}></img>
         <Link to="/pizza">
-            <Button className="button" style={{backgroundColor: 'red'}}>Order Pizza!</Button>
+            <Button className="button" style={{backgroundColor: 'red'}}>Gimme Pizza!</Button>
         </Link>
         </div>
     )
