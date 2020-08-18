@@ -70,10 +70,6 @@ const PizzaForm = () => {
             })
         }
 
-        const location = {
-           pathname: '/submit', 
-           state: { pizzaForm : true }
-        }
   
         //Creating POST request using Axios when form is submitted using formSubmit function
         const formSubmit = (e) => {
@@ -84,7 +80,8 @@ const PizzaForm = () => {
                 .post("https://reqres.in/api/users", pizzaForm)
                 .then(response => {
                     console.log("POST is successful!", response.data)
-                    // setPost(response.data)
+                    setPost(response.data)
+                    history.push('/submit', [post])
                     setServerError(null)
                     setPizzaForm(emptyData)
   
@@ -92,7 +89,7 @@ const PizzaForm = () => {
                 .catch(err => {
                     setServerError("API POST request failed!")
                 })
-            history.push(location)
+           
             
         }
   
