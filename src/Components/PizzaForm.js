@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import * as yup from 'yup';
+import SubmitPage from './SubmitPage';
 
 
 const PizzaForm = () => {
-
+  
+    const history = useHistory();
+  
     const emptyData = {
         name: "",
         size: "",
@@ -15,24 +19,25 @@ const PizzaForm = () => {
         toppingFour: false,
         specialInstructions: "",
     }
-
+  
         //Creating initial state for forms. 
         const [pizzaForm, setPizzaForm] = useState(emptyData)
-
+  
         //Creating initial state for errors. Uses String to state errors.
         const [errors, setErrors] = useState(emptyData)
-    
-        //Creating temporary state to display API POST response on the DOM.
-        const [post, setPost] = useState([])
+  
+           //Creating temporary state to display API POST response on the DOM.
+           const [post, setPost] = useState([])
+        
     
         //Creating state for server error. Uses String.
         const [serverError, setServerError] = useState("")
     
         //Creating button state to disable if input does not meet requirements/is not validated
         const [button, setButton] = useState(true);
-
+  
         const formSchema = yup.object().shape({
-
+  
             name: yup.string().min([2], "Minimum two characters").required("Name is required"),
             size: yup.string().oneOf(["Small", "Medium", "Large"], "Please pick a size"),
             toppingOne: yup.boolean(),
@@ -40,12 +45,12 @@ const PizzaForm = () => {
             toppingThree: yup.boolean(),
             toppingFour: yup.boolean(),
             specialInstructions: yup.string(),
-
+  
         })
-
+  
         //Creating validations using Yup
         const validateChange = (e) => {
-
+  
             yup
             .reach(formSchema, e.target.name)
             .validate(e.target.name ? e.target.value : null)
@@ -64,25 +69,29 @@ const PizzaForm = () => {
                 })
             })
         }
-
+  
         //Creating POST request using Axios when form is submitted using formSubmit function
         const formSubmit = (e) => {
             e.preventDefault();
             console.log("Form submitted!")
-
+  
             axios
                 .post("https://reqres.in/api/users", pizzaForm)
                 .then(response => {
                     console.log("POST is successful!", response.data)
-                    setPost(response.data)
+                    // setPost(response.data)
                     setServerError(null)
+                    history.push('/submit', [pizzaForm])
                     setPizzaForm(emptyData)
+  
                 })
                 .catch(err => {
                     setServerError("API POST request failed!")
                 })
+            
+            
         }
-
+  
         //Creating onChange function to hook up state with new input 
         const inputChange = (e) => {
             e.persist()
@@ -94,7 +103,7 @@ const PizzaForm = () => {
             validateChange(e)
             setPizzaForm(newData)
         }
-
+  
         //If everything checks, then button is enabled
         useEffect(() => {
             formSchema.isValid(pizzaForm)
@@ -102,11 +111,12 @@ const PizzaForm = () => {
                 setButton(!isValid)
             })
         }, [pizzaForm])
-
+  
     return (
+
        <Form onSubmit = {formSubmit} className="form">
        {serverError ? <p>{serverError}</p> : null}
-
+  
            <FormGroup>
                <Label htmlFor = "name">
                    What's your name?
@@ -122,8 +132,8 @@ const PizzaForm = () => {
                    {errors.name.length > 0 ? <p>{errors.name}</p> : null}
                </Label>
            </FormGroup>
-
-
+  
+  
            <FormGroup>
                <Label htmlFor = "size">
                    <select
@@ -141,9 +151,9 @@ const PizzaForm = () => {
                    {errors.size.length > 0 ? <p>{errors.size}</p> : null}
                </Label>
            </FormGroup>
-
+  
            <h5>Pick your toppings:</h5>
-
+  
            <FormGroup>
                <Label htmlFor = "toppingOne">
                    <Input
@@ -158,7 +168,7 @@ const PizzaForm = () => {
             
                </Label>
            </FormGroup>
-
+  
            <FormGroup>
                <Label htmlFor = "topping">
                    <Input
@@ -173,7 +183,7 @@ const PizzaForm = () => {
              
                </Label>
            </FormGroup>
-
+  
            <FormGroup>
                <Label htmlFor = "toppingThree">
                    <Input
@@ -187,7 +197,7 @@ const PizzaForm = () => {
                    Bell Peppers
                </Label>
            </FormGroup>
-
+  
            <FormGroup>
                <Label htmlFor = "toppingFour">
                    <Input
@@ -201,9 +211,9 @@ const PizzaForm = () => {
                    Pineapples
                </Label>
            </FormGroup>
-
+  
            <h5>Special instructions</h5>
-
+  
            <FormGroup>
             <Label htmlFor = "specialInstructions">
                 <textarea
@@ -216,23 +226,21 @@ const PizzaForm = () => {
                     onChange = {inputChange}/>
             </Label>
             </FormGroup>
-
+  
+        
             <Button type = "submit" data-cy = "submit" disabled = {button} >
                 Submit Order
-            </Button>
-
-            {/* To display POST data on the DOM */}
-            <pre>{JSON.stringify(post, null, 2)}</pre> 
-
+                </Button>
+                
+                      {/* To display POST data on the DOM */}
+                      {/* <pre>{JSON.stringify(post, null, 2)}</pre>  */}
+  
+  
        </Form>
-
+  
     )
     
+  
+  }
 
-}
-
-export default PizzaForm;
-
-
-
-
+  export default PizzaForm;
